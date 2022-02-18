@@ -1,0 +1,663 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Data Cleaning &#8212; Snowmass 2022 Summer Attendance Survey</title>
+    
+  <link href="_static/css/theme.css" rel="stylesheet">
+  <link href="_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script>
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Markdown Files" href="markdown.html" />
+    <link rel="prev" title="Seattle Summer Snowmass Meeting Attendance Survey Results" href="intro.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Snowmass 2022 Summer Attendance Survey</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="intro.html">
+   Seattle Summer Snowmass Meeting Attendance Survey Results
+  </a>
+ </li>
+</ul>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Data Cleaning
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="markdown.html">
+   Markdown Files
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="notebooks.html">
+   Content with notebooks
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="_sources/cleaning.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/executablebooks/jupyter-book"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fcleaning.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/main?urlpath=tree/attendance/cleaning.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#time">
+   Time
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#employed-by">
+   Employed By
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#rank">
+   Rank
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#frontier">
+   Frontier
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#writing-out-the-file">
+   Writing out the file
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Data Cleaning</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#time">
+   Time
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#employed-by">
+   Employed By
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#rank">
+   Rank
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#frontier">
+   Frontier
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#writing-out-the-file">
+   Writing out the file
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="data-cleaning">
+<h1>Data Cleaning<a class="headerlink" href="#data-cleaning" title="Permalink to this headline">¶</a></h1>
+<p>For some of this work we need to clean or aggragate the data. People entered a lot of details - which is amazing - but we don’t want to look at per-person responses as much as in aggregate. This page describes what we did to clean up the survey responses.</p>
+<p>This notebook loads in the raw data, and writes out a new file that can be loaded “at will” with “clean” data by all the other notebooks.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">math</span>
+<span class="n">raw_survey</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;/workspaces/snowmass-attendance/survey.csv&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="time">
+<h2>Time<a class="headerlink" href="#time" title="Permalink to this headline">¶</a></h2>
+<p>Convert the time the person filled out the survey into something that is a time object.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">time_col</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">raw_survey</span><span class="p">[</span><span class="s2">&quot;Timestamp&quot;</span><span class="p">])</span>
+<span class="n">survey</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">time_col</span><span class="p">)</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;Timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;time&quot;</span><span class="p">})</span>
+<span class="n">survey</span><span class="p">[</span><span class="s2">&quot;time&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">raw_survey</span><span class="p">[</span><span class="s2">&quot;Timestamp&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="employed-by">
+<h2>Employed By<a class="headerlink" href="#employed-by" title="Permalink to this headline">¶</a></h2>
+<p>Here is a list of what people answered for how they were employed. People entered a lot of different things - below is how we mapped everyone. Some of the choices were… guesses. Hopefully they do not affect things too much.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">c_employed_by_name</span> <span class="o">=</span> <span class="s2">&quot;I&#39;m employed by&quot;</span>
+<span class="s1">&#39;,&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">list</span><span class="p">((</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">raw_survey</span><span class="p">[</span><span class="n">c_employed_by_name</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">())))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;nan,US National Lab,US University,Italian National Institute,International university ,TRIUMF,Perfer not to answer,International University,Non-US institution,European university,EU Lab,Spanish Research Council (CSIC),INFN (Italy),European Lab,research institute in Eastern Europe,Italian University,European lab,CERN,German University,Other country,University in Canada,Research laboratory in Germany.,UK University,European National lab,retired,INFN,Istituto Nazionale di Fisica Nucleare (INFN), Italy,Lund University,University,overseas university,retired faculty,employeed by national lab, grad student at a US university,non US,Canadian research institute,Università degli Studi di Padova,Canada University,Research institute,Canadian university (and, btw, &quot;perfer&quot; is not a word ...),Foreign Lab,Small Liberal Arts  College,Ukrainian university (Main Astronomical Observatory of NAS Ukraine),foreign lab,non-US lab,Foreign University,a European national insitution,Korean University ,EU university,EU Research center,European institution,Non-US university (University of ICeland),University outside US,non-US University,The University of Torino,Non US University (Colombia),UK university,INFN, Italy,Industry,University of Granada (Spain),University of Medellin,CSIC (Spain),Indian University,National Lab outside US,Brazilian University,German research institute,European Institution,US College,UT Austin,NASA,Joint Italian and US university,University in Europe ,European University,Department of Atomic Energy, India,Retired from US University,Canadian university,Swiss University,Small business,kIAS,Sultan Qaboos University (Oman),non-US university,Uk institution,Cairo university, Egypt,Canadian University ,US DOE-funded laboratory (not formally a US National Lab),US Liberal-Arts College (if &quot;university&quot; was meant to encompass this, feel free to log my response as such, but liberal-arts-college faculty probably would not use that terminology),Japanese University,International university,Business,EU National Research Institute,Saha Institute of Nuclear Physics , kolkata, India,Research institution in Canada,former employee of US Nat Lab,CNRS,German National Lab,Institute of High Energy Physics, Chinese Academy of Sciences,Italian Institution,INFN - Italy,Foreign university,FEI University at SBC São Paulo, Brazil,Swiss and French pensioner would be on CERN mission,South Korea University,actually, I am retired,Non-US University,Dutch university,French Lab, previously working in the US,Retired,EU University,EU institution,Overseas university,A foreign university full time and a US University as a part time ,emeritus,both lab and university,US National Lab (ret\&#39;d),Employed abroad in a National Lab,Canadian University,I am a self-funded PhD researcher so not employed.,University&amp;Laboratory&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">employted_by_t</span> <span class="o">=</span> <span class="p">{</span>
+ <span class="s1">&#39;US National Lab&#39;</span><span class="p">:</span> <span class="s1">&#39;US National Lab&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;US University&#39;</span><span class="p">:</span> <span class="s1">&#39;US University&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;Italian National Institute&#39;</span> <span class="p">:</span> <span class="s2">&quot;non-EU&quot;</span><span class="p">,</span>
+ <span class="s1">&#39;International university &#39;</span> <span class="p">:</span> <span class="s2">&quot;non-EU&quot;</span><span class="p">,</span>
+ <span class="s1">&#39;TRIUMF&#39;</span><span class="p">:</span> <span class="s2">&quot;Canada&quot;</span><span class="p">,</span>
+ <span class="s1">&#39;Perfer not to answer&#39;</span><span class="p">:</span> <span class="s2">&quot;Unknown&quot;</span><span class="p">,</span>
+ <span class="s1">&#39;International University&#39;</span><span class="p">:</span> <span class="s2">&quot;EU&quot;</span><span class="p">,</span>
+ <span class="s1">&#39;Non-US institution&#39;</span><span class="p">:</span> <span class="s2">&quot;EU&quot;</span><span class="p">,</span>
+ <span class="s1">&#39;European university&#39;</span><span class="p">:</span> <span class="s2">&quot;EU&quot;</span><span class="p">,</span>
+ <span class="s1">&#39;EU Lab&#39;</span><span class="p">:</span> <span class="s2">&quot;EU&quot;</span><span class="p">,</span>
+ <span class="s1">&#39;Spanish Research Council (CSIC)&#39;</span><span class="p">:</span> <span class="s2">&quot;EU&quot;</span><span class="p">,</span>
+ <span class="s1">&#39;INFN (Italy)&#39;</span><span class="p">:</span> <span class="s2">&quot;EU&quot;</span><span class="p">,</span>
+ <span class="s1">&#39;European Lab&#39;</span><span class="p">:</span> <span class="s2">&quot;EU&quot;</span><span class="p">,</span>
+ <span class="s1">&#39;research institute in Eastern Europe&#39;</span><span class="p">:</span> <span class="s2">&quot;EU&quot;</span><span class="p">,</span>
+ <span class="s1">&#39;Italian University&#39;</span><span class="p">:</span> <span class="s2">&quot;EU&quot;</span><span class="p">,</span>
+ <span class="s1">&#39;European lab&#39;</span><span class="p">:</span> <span class="s2">&quot;EU&quot;</span><span class="p">,</span>
+ <span class="s1">&#39;CERN&#39;</span><span class="p">:</span> <span class="s2">&quot;EU&quot;</span><span class="p">,</span>
+ <span class="s1">&#39;German University&#39;</span><span class="p">:</span> <span class="s2">&quot;EU&quot;</span><span class="p">,</span>
+ <span class="s1">&#39;Other country&#39;</span><span class="p">:</span> <span class="s2">&quot;non-EU&quot;</span><span class="p">,</span>
+ <span class="s1">&#39;University in Canada&#39;</span><span class="p">:</span> <span class="s2">&quot;Canada&quot;</span><span class="p">,</span>
+ <span class="s1">&#39;Research laboratory in Germany.&#39;</span><span class="p">:</span> <span class="s2">&quot;EU&quot;</span><span class="p">,</span>
+ <span class="s1">&#39;UK University&#39;</span><span class="p">:</span> <span class="s2">&quot;EU&quot;</span><span class="p">,</span>
+ <span class="s1">&#39;European National lab&#39;</span><span class="p">:</span> <span class="s2">&quot;EU&quot;</span><span class="p">,</span>
+ <span class="s1">&#39;retired&#39;</span><span class="p">:</span> <span class="s2">&quot;Unknown&quot;</span><span class="p">,</span>
+ <span class="s1">&#39;INFN&#39;</span><span class="p">:</span> <span class="s2">&quot;EU&quot;</span><span class="p">,</span>
+ <span class="s1">&#39;Istituto Nazionale di Fisica Nucleare (INFN), Italy&#39;</span><span class="p">:</span> <span class="s2">&quot;EU&quot;</span><span class="p">,</span>
+ <span class="s1">&#39;Lund University&#39;</span><span class="p">:</span> <span class="s2">&quot;EU&quot;</span><span class="p">,</span>
+ <span class="s1">&#39;University&#39;</span><span class="p">:</span> <span class="s2">&quot;EU&quot;</span><span class="p">,</span>
+ <span class="s1">&#39;overseas university&#39;</span><span class="p">:</span> <span class="s2">&quot;EU&quot;</span><span class="p">,</span>
+ <span class="s1">&#39;retired faculty&#39;</span><span class="p">:</span> <span class="s2">&quot;Unknown&quot;</span><span class="p">,</span>
+ <span class="s1">&#39;employeed by national lab, grad student at a US university&#39;</span><span class="p">:</span> <span class="s2">&quot;US National Lab&quot;</span><span class="p">,</span>
+ <span class="s1">&#39;non US&#39;</span><span class="p">:</span> <span class="s2">&quot;EU&quot;</span><span class="p">,</span>
+ <span class="s1">&#39;Canadian research institute&#39;</span><span class="p">:</span> <span class="s2">&quot;Canada&quot;</span><span class="p">,</span>
+ <span class="s1">&#39;Università degli Studi di Padova&#39;</span><span class="p">:</span> <span class="s2">&quot;EU&quot;</span><span class="p">,</span>
+ <span class="s1">&#39;Canada University&#39;</span><span class="p">:</span> <span class="s2">&quot;Canada&quot;</span><span class="p">,</span>
+ <span class="s1">&#39;Research institute&#39;</span><span class="p">:</span> <span class="s2">&quot;EU&quot;</span><span class="p">,</span>
+ <span class="s1">&#39;Canadian university (and, btw, &quot;perfer&quot; is not a word ...)&#39;</span><span class="p">:</span> <span class="s2">&quot;Canada&quot;</span><span class="p">,</span>
+ <span class="s1">&#39;Foreign Lab&#39;</span><span class="p">:</span> <span class="s2">&quot;EU&quot;</span><span class="p">,</span>
+ <span class="s1">&#39;Small Liberal Arts  College&#39;</span><span class="p">:</span> <span class="s2">&quot;US University&quot;</span><span class="p">,</span>
+ <span class="s1">&#39;Ukrainian university (Main Astronomical Observatory of NAS Ukraine)&#39;</span><span class="p">:</span> <span class="s2">&quot;non-EU&quot;</span><span class="p">,</span>
+ <span class="s1">&#39;foreign lab&#39;</span><span class="p">:</span> <span class="s2">&quot;EU&quot;</span><span class="p">,</span>
+ <span class="s1">&#39;non-US lab&#39;</span><span class="p">:</span> <span class="s2">&quot;EU&quot;</span><span class="p">,</span>
+ <span class="s1">&#39;Foreign University&#39;</span><span class="p">:</span> <span class="s2">&quot;EU&quot;</span><span class="p">,</span>
+ <span class="s1">&#39;a European national insitution&#39;</span><span class="p">:</span> <span class="s2">&quot;EU&quot;</span><span class="p">,</span>
+ <span class="s1">&#39;Korean University &#39;</span><span class="p">:</span> <span class="s2">&quot;non-EU&quot;</span><span class="p">,</span>
+ <span class="s1">&#39;EU university&#39;</span><span class="p">:</span> <span class="s2">&quot;EU&quot;</span><span class="p">,</span>
+ <span class="s1">&#39;EU Research center&#39;</span><span class="p">:</span> <span class="s2">&quot;EU&quot;</span><span class="p">,</span>
+ <span class="s1">&#39;European institution&#39;</span><span class="p">:</span> <span class="s2">&quot;EU&quot;</span><span class="p">,</span>
+ <span class="s1">&#39;Non-US university (University of ICeland)&#39;</span><span class="p">:</span> <span class="s2">&quot;non-EU&quot;</span><span class="p">,</span>
+ <span class="s1">&#39;University outside US&#39;</span><span class="p">:</span> <span class="s2">&quot;EU&quot;</span><span class="p">,</span>
+ <span class="s1">&#39;non-US University&#39;</span><span class="p">:</span> <span class="s2">&quot;EU&quot;</span><span class="p">,</span>
+ <span class="s1">&#39;The University of Torino&#39;</span><span class="p">:</span> <span class="s2">&quot;EU&quot;</span><span class="p">,</span>
+ <span class="s1">&#39;Non US University (Colombia)&#39;</span><span class="p">:</span> <span class="s2">&quot;non-EU&quot;</span><span class="p">,</span>
+ <span class="s1">&#39;UK university&#39;</span><span class="p">:</span> <span class="s2">&quot;EU&quot;</span><span class="p">,</span>
+ <span class="s1">&#39;INFN, Italy&#39;</span><span class="p">:</span> <span class="s2">&quot;EU&quot;</span><span class="p">,</span>
+ <span class="s1">&#39;Industry&#39;</span><span class="p">:</span> <span class="s2">&quot;Industry&quot;</span><span class="p">,</span>
+ <span class="s1">&#39;University of Granada (Spain)&#39;</span><span class="p">:</span> <span class="s2">&quot;EU&quot;</span><span class="p">,</span>
+ <span class="s1">&#39;University of Medellin&#39;</span><span class="p">:</span> <span class="s2">&quot;EU&quot;</span><span class="p">,</span>
+ <span class="s1">&#39;CSIC (Spain)&#39;</span><span class="p">:</span> <span class="s2">&quot;EU&quot;</span><span class="p">,</span>
+ <span class="s1">&#39;Indian University&#39;</span><span class="p">:</span> <span class="s2">&quot;non-EU&quot;</span><span class="p">,</span>
+ <span class="s1">&#39;National Lab outside US&#39;</span><span class="p">:</span> <span class="s2">&quot;EU&quot;</span><span class="p">,</span>
+ <span class="s1">&#39;Brazilian University&#39;</span><span class="p">:</span> <span class="s2">&quot;non-EU&quot;</span><span class="p">,</span>
+ <span class="s1">&#39;German research institute&#39;</span><span class="p">:</span> <span class="s2">&quot;EU&quot;</span><span class="p">,</span>
+ <span class="s1">&#39;European Institution&#39;</span><span class="p">:</span> <span class="s2">&quot;EU&quot;</span><span class="p">,</span>
+ <span class="s1">&#39;US College&#39;</span><span class="p">:</span> <span class="s2">&quot;US University&quot;</span><span class="p">,</span>
+ <span class="s1">&#39;UT Austin&#39;</span><span class="p">:</span> <span class="s2">&quot;US University&quot;</span><span class="p">,</span>
+ <span class="s1">&#39;NASA&#39;</span><span class="p">:</span> <span class="s2">&quot;US National Lab&quot;</span><span class="p">,</span>
+ <span class="s1">&#39;Joint Italian and US university&#39;</span><span class="p">:</span> <span class="s2">&quot;EU&quot;</span><span class="p">,</span>
+ <span class="s1">&#39;University in Europe &#39;</span><span class="p">:</span> <span class="s2">&quot;EU&quot;</span><span class="p">,</span>
+ <span class="s1">&#39;European University&#39;</span><span class="p">:</span> <span class="s2">&quot;EU&quot;</span><span class="p">,</span>
+ <span class="s1">&#39;Department of Atomic Energy, India&#39;</span><span class="p">:</span> <span class="s2">&quot;non-EU&quot;</span><span class="p">,</span>
+ <span class="s1">&#39;Retired from US University&#39;</span><span class="p">:</span> <span class="s2">&quot;US University&quot;</span><span class="p">,</span>
+ <span class="s1">&#39;Canadian university&#39;</span><span class="p">:</span> <span class="s2">&quot;Canada&quot;</span><span class="p">,</span>
+ <span class="s1">&#39;Swiss University&#39;</span><span class="p">:</span> <span class="s2">&quot;EU&quot;</span><span class="p">,</span>
+ <span class="s1">&#39;Small business&#39;</span><span class="p">:</span> <span class="s2">&quot;Industry&quot;</span><span class="p">,</span>
+ <span class="s1">&#39;kIAS&#39;</span><span class="p">:</span> <span class="s2">&quot;non-EU&quot;</span><span class="p">,</span>
+ <span class="s1">&#39;Sultan Qaboos University (Oman)&#39;</span><span class="p">:</span> <span class="s2">&quot;non-EU&quot;</span><span class="p">,</span>
+ <span class="s1">&#39;non-US university&#39;</span><span class="p">:</span> <span class="s2">&quot;EU&quot;</span><span class="p">,</span>
+ <span class="s1">&#39;Uk institution&#39;</span><span class="p">:</span> <span class="s2">&quot;EU&quot;</span><span class="p">,</span>
+ <span class="s1">&#39;Cairo university, Egypt&#39;</span><span class="p">:</span> <span class="s2">&quot;non-EU&quot;</span><span class="p">,</span>
+ <span class="s1">&#39;Canadian University &#39;</span><span class="p">:</span> <span class="s2">&quot;Canada&quot;</span><span class="p">,</span>
+ <span class="s1">&#39;US DOE-funded laboratory (not formally a US National Lab)&#39;</span><span class="p">:</span> <span class="s2">&quot;US National Lab&quot;</span><span class="p">,</span>
+ <span class="s1">&#39;US Liberal-Arts College (if &quot;university&quot; was meant to encompass this, feel free to log my response as such, but liberal-arts-college faculty probably would not use that terminology)&#39;</span><span class="p">:</span> <span class="s2">&quot;US University&quot;</span><span class="p">,</span>
+ <span class="s1">&#39;Japanese University&#39;</span><span class="p">:</span> <span class="s2">&quot;non-EU&quot;</span><span class="p">,</span>
+ <span class="s1">&#39;International university&#39;</span><span class="p">:</span> <span class="s2">&quot;International&quot;</span><span class="p">,</span>
+ <span class="s1">&#39;Business&#39;</span><span class="p">:</span> <span class="s2">&quot;Industry&quot;</span><span class="p">,</span>
+ <span class="s1">&#39;EU National Research Institute&#39;</span><span class="p">:</span> <span class="s2">&quot;EU&quot;</span><span class="p">,</span>
+ <span class="s1">&#39;Saha Institute of Nuclear Physics , kolkata, India&#39;</span><span class="p">:</span> <span class="s2">&quot;non-EU&quot;</span><span class="p">,</span>
+ <span class="s1">&#39;Research institution in Canada&#39;</span><span class="p">:</span> <span class="s2">&quot;Canada&quot;</span><span class="p">,</span>
+ <span class="s1">&#39;former employee of US Nat Lab&#39;</span><span class="p">:</span> <span class="s2">&quot;US National Lab&quot;</span><span class="p">,</span>
+ <span class="s1">&#39;CNRS&#39;</span><span class="p">:</span> <span class="s2">&quot;EU&quot;</span><span class="p">,</span>
+ <span class="s1">&#39;German National Lab&#39;</span><span class="p">:</span> <span class="s2">&quot;EU&quot;</span><span class="p">,</span>
+ <span class="s1">&#39;Institute of High Energy Physics, Chinese Academy of Sciences&#39;</span><span class="p">:</span> <span class="s2">&quot;non-EU&quot;</span><span class="p">,</span>
+ <span class="s1">&#39;Italian Institution&#39;</span><span class="p">:</span> <span class="s2">&quot;EU&quot;</span><span class="p">,</span>
+ <span class="s1">&#39;INFN - Italy&#39;</span><span class="p">:</span> <span class="s2">&quot;EU&quot;</span><span class="p">,</span>
+ <span class="s1">&#39;Foreign university&#39;</span><span class="p">:</span> <span class="s2">&quot;EU&quot;</span><span class="p">,</span>
+ <span class="s1">&#39;FEI University at SBC São Paulo, Brazil&#39;</span><span class="p">:</span> <span class="s2">&quot;non-EU&quot;</span><span class="p">,</span>
+ <span class="s1">&#39;Swiss and French pensioner would be on CERN mission&#39;</span><span class="p">:</span> <span class="s2">&quot;EU&quot;</span><span class="p">,</span>
+ <span class="s1">&#39;South Korea University&#39;</span><span class="p">:</span> <span class="s2">&quot;non-EU&quot;</span><span class="p">,</span>
+ <span class="s1">&#39;actually, I am retired&#39;</span><span class="p">:</span> <span class="s2">&quot;US University&quot;</span><span class="p">,</span>
+ <span class="s1">&#39;Non-US University&#39;</span><span class="p">:</span> <span class="s2">&quot;EU&quot;</span><span class="p">,</span>
+ <span class="s1">&#39;Dutch university&#39;</span><span class="p">:</span> <span class="s2">&quot;EU&quot;</span><span class="p">,</span>
+ <span class="s1">&#39;French Lab, previously working in the US&#39;</span><span class="p">:</span> <span class="s2">&quot;EU&quot;</span><span class="p">,</span>
+ <span class="s1">&#39;Retired&#39;</span><span class="p">:</span> <span class="s2">&quot;US University&quot;</span><span class="p">,</span>
+ <span class="s1">&#39;EU University&#39;</span><span class="p">:</span> <span class="s2">&quot;EU&quot;</span><span class="p">,</span>
+ <span class="s1">&#39;EU institution&#39;</span><span class="p">:</span> <span class="s2">&quot;EU&quot;</span><span class="p">,</span>
+ <span class="s1">&#39;Overseas university&#39;</span><span class="p">:</span> <span class="s2">&quot;EU&quot;</span><span class="p">,</span>
+ <span class="s1">&#39;A foreign university full time and a US University as a part time &#39;</span><span class="p">:</span> <span class="s2">&quot;US University&quot;</span><span class="p">,</span>
+ <span class="s1">&#39;emeritus&#39;</span><span class="p">:</span> <span class="s2">&quot;US University&quot;</span><span class="p">,</span>
+ <span class="s1">&#39;both lab and university&#39;</span><span class="p">:</span> <span class="s2">&quot;US National Lab&quot;</span><span class="p">,</span>
+ <span class="s2">&quot;US National Lab (ret&#39;d)&quot;</span><span class="p">:</span> <span class="s2">&quot;US National Lab&quot;</span><span class="p">,</span>
+ <span class="s1">&#39;Employed abroad in a National Lab&#39;</span><span class="p">:</span> <span class="s2">&quot;EU&quot;</span><span class="p">,</span>
+ <span class="s1">&#39;Canadian University&#39;</span><span class="p">:</span> <span class="s2">&quot;Canada&quot;</span><span class="p">,</span>
+ <span class="s1">&#39;I am a self-funded PhD researcher so not employed.&#39;</span><span class="p">:</span> <span class="s2">&quot;Industry&quot;</span><span class="p">,</span>
+ <span class="s1">&#39;University&amp;Laboratory&#39;</span><span class="p">:</span> <span class="s2">&quot;US University&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">survey</span><span class="p">[</span><span class="s2">&quot;employed_by&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">raw_survey</span><span class="p">[</span><span class="n">c_employed_by_name</span><span class="p">]</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="k">lambda</span> <span class="n">i</span><span class="p">:</span> <span class="n">employted_by_t</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="n">i</span> <span class="k">else</span> <span class="s1">&#39;Unknown&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="s1">&#39;,&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">survey</span><span class="o">.</span><span class="n">employed_by</span><span class="o">.</span><span class="n">unique</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;Unknown,US National Lab,US University,non-EU,Canada,EU,Industry,International&#39;
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="rank">
+<h2>Rank<a class="headerlink" href="#rank" title="Permalink to this headline">¶</a></h2>
+<p>Normalize the rank of the person that replied</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">c_rank</span> <span class="o">=</span> <span class="s2">&quot;I am a&quot;</span>
+<span class="s1">&#39;,&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">list</span><span class="p">((</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">raw_survey</span><span class="p">[</span><span class="n">c_rank</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">())))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;Post-doc,nan,Professor or Lab Scientist (tenured),Graduate Student,Professor or Lab Scientist (untenured),Research Scientist,Perfer not to answer,Lab fellow,Engineer, Staff, or other non-physicist role,PHD student,Lab management,retired engineer/physicist,retired professor ,Lab Director - Japan,Retired lab scientist,Division Director,retired professor,Retired,Honorary Professor,Emeritus,Scientist Emeritus (Fermilab),Guest Scientist, retired. &#39;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rank_t</span> <span class="o">=</span> <span class="p">{</span>
+ <span class="s1">&#39;Post-doc&#39;</span><span class="p">:</span> <span class="s2">&quot;Post-doc&quot;</span><span class="p">,</span>
+ <span class="s1">&#39;Professor or Lab Scientist (tenured)&#39;</span><span class="p">:</span> <span class="s1">&#39;Professor or Lab Scientist (tenured)&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;Graduate Student&#39;</span><span class="p">:</span> <span class="s1">&#39;Graduate Student&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;Professor or Lab Scientist (untenured)&#39;</span><span class="p">:</span> <span class="s1">&#39;Professor or Lab Scientist (untenured)&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;Research Scientist&#39;</span><span class="p">:</span> <span class="s1">&#39;Research Scientist&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;Perfer not to answer&#39;</span><span class="p">:</span> <span class="s1">&#39;Unknown&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;Lab fellow&#39;</span><span class="p">:</span> <span class="s1">&#39;Professor or Lab Scientist (untenured)&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;Engineer, Staff, or other non-physicist role&#39;</span><span class="p">:</span> <span class="s1">&#39;Engineer, Staff, or other non-physicist role&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;PHD student&#39;</span><span class="p">:</span> <span class="s1">&#39;Graduate Student&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;Lab management&#39;</span><span class="p">:</span> <span class="s1">&#39;Professor or Lab Scientist (tenured)&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;retired engineer/physicist&#39;</span><span class="p">:</span> <span class="s1">&#39;Professor or Lab Scientist (tenured)&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;retired professor &#39;</span><span class="p">:</span> <span class="s1">&#39;Professor or Lab Scientist (tenured)&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;Lab Director - Japan&#39;</span><span class="p">:</span> <span class="s1">&#39;Professor or Lab Scientist (tenured)&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;Retired lab scientist&#39;</span><span class="p">:</span> <span class="s1">&#39;Professor or Lab Scientist (tenured)&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;Division Director&#39;</span><span class="p">:</span> <span class="s1">&#39;Professor or Lab Scientist (tenured)&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;retired professor&#39;</span><span class="p">:</span> <span class="s1">&#39;Professor or Lab Scientist (tenured)&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;Retired&#39;</span><span class="p">:</span> <span class="s1">&#39;Professor or Lab Scientist (tenured)&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;Honorary Professor&#39;</span><span class="p">:</span> <span class="s1">&#39;Professor or Lab Scientist (tenured)&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;Emeritus&#39;</span><span class="p">:</span> <span class="s1">&#39;Professor or Lab Scientist (tenured)&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;Scientist Emeritus (Fermilab)&#39;</span><span class="p">:</span> <span class="s1">&#39;Professor or Lab Scientist (tenured)&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;Guest Scientist, retired. &#39;</span><span class="p">:</span> <span class="s1">&#39;Professor or Lab Scientist (tenured)&#39;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">survey</span><span class="p">[</span><span class="s2">&quot;job_rank&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">raw_survey</span><span class="p">[</span><span class="n">c_rank</span><span class="p">]</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="k">lambda</span> <span class="n">i</span><span class="p">:</span> <span class="n">rank_t</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="n">i</span> <span class="k">else</span> <span class="s1">&#39;Unknown&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="s1">&#39;,&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">survey</span><span class="o">.</span><span class="n">job_rank</span><span class="o">.</span><span class="n">unique</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;Post-doc,Unknown,Professor or Lab Scientist (tenured),Graduate Student,Professor or Lab Scientist (untenured),Research Scientist,Engineer, Staff, or other non-physicist role&#39;
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="frontier">
+<h2>Frontier<a class="headerlink" href="#frontier" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">c_frontier</span> <span class="o">=</span> <span class="s2">&quot;I primarily am interested in sessions associated with:&quot;</span>
+<span class="s1">&#39;,&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">list</span><span class="p">((</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">raw_survey</span><span class="p">[</span><span class="n">c_frontier</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">())))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;nan,Neutrino Frontier, Rare Processes and Precision Measurements, Instrumentation Frontier, Community Engagement,Energy Frontier, Computational Frontier,Neutrino Frontier, Theory Frontier, Community Engagement,Cosmic Frontier, Theory Frontier,Cosmic Frontier, Community Engagement,Neutrino Frontier, Computational Frontier,Cosmic Frontier, Computational Frontier, Community Engagement,Theory Frontier, Computational Frontier,Neutrino Frontier, Rare Processes and Precision Measurements, Cosmic Frontier, Underground Facilities,Energy Frontier, Cosmic Frontier, Theory Frontier,Energy Frontier, Accelerator Frontier, Instrumentation Frontier, Computational Frontier,Energy Frontier, Neutrino Frontier, Computational Frontier, Community Engagement,Neutrino Frontier, Instrumentation Frontier, Underground Facilities,Neutrino Frontier,Energy Frontier, Neutrino Frontier, Rare Processes and Precision Measurements, Cosmic Frontier, Theory Frontier, Accelerator Frontier,Neutrino Frontier, Community Engagement,Neutrino Frontier, Rare Processes and Precision Measurements, Underground Facilities,Cosmic Frontier, Instrumentation Frontier,Energy Frontier, Computational Frontier, Community Engagement,Rare Processes and Precision Measurements, Cosmic Frontier,Energy Frontier,Cosmic Frontier, Instrumentation Frontier, Computational Frontier, Community Engagement,Energy Frontier, Community Engagement,Computational Frontier,Cosmic Frontier,Rare Processes and Precision Measurements, Theory Frontier,Energy Frontier, Theory Frontier,Rare Processes and Precision Measurements,Rare Processes and Precision Measurements, Accelerator Frontier, Computational Frontier,Energy Frontier, Neutrino Frontier, Cosmic Frontier, Theory Frontier, Computational Frontier,Neutrino Frontier, Cosmic Frontier, Instrumentation Frontier,Neutrino Frontier, Rare Processes and Precision Measurements, Instrumentation Frontier,Neutrino Frontier, Rare Processes and Precision Measurements, Cosmic Frontier, Theory Frontier,Rare Processes and Precision Measurements, Accelerator Frontier, Instrumentation Frontier,Energy Frontier, Neutrino Frontier, Cosmic Frontier, Theory Frontier,Energy Frontier, Accelerator Frontier, Instrumentation Frontier, Computational Frontier, Community Engagement,Energy Frontier, Rare Processes and Precision Measurements, Instrumentation Frontier, Computational Frontier,Neutrino Frontier, Rare Processes and Precision Measurements, Theory Frontier,Energy Frontier, Instrumentation Frontier,Theory Frontier,Energy Frontier, Cosmic Frontier, Instrumentation Frontier,Energy Frontier, Neutrino Frontier, Rare Processes and Precision Measurements, Theory Frontier,Energy Frontier, Accelerator Frontier, Instrumentation Frontier,Energy Frontier, Rare Processes and Precision Measurements,Energy Frontier, Theory Frontier, Computational Frontier,Energy Frontier, Accelerator Frontier, Computational Frontier,Energy Frontier, Neutrino Frontier, Theory Frontier, Computational Frontier,Energy Frontier, Neutrino Frontier, Rare Processes and Precision Measurements, Theory Frontier, Accelerator Frontier, Instrumentation Frontier,Energy Frontier, Cosmic Frontier,Rare Processes and Precision Measurements, Theory Frontier, Accelerator Frontier,Energy Frontier, Instrumentation Frontier, Computational Frontier,Energy Frontier, Rare Processes and Precision Measurements, Cosmic Frontier,Energy Frontier, Neutrino Frontier, Rare Processes and Precision Measurements, Cosmic Frontier, Theory Frontier, Accelerator Frontier, Instrumentation Frontier,Energy Frontier, Rare Processes and Precision Measurements, Theory Frontier, Computational Frontier,Accelerator Frontier,Rare Processes and Precision Measurements, Instrumentation Frontier,Energy Frontier, Rare Processes and Precision Measurements, Cosmic Frontier, Theory Frontier,Energy Frontier, Theory Frontier, Accelerator Frontier, Instrumentation Frontier,Energy Frontier, Neutrino Frontier, Instrumentation Frontier,Energy Frontier, Accelerator Frontier,Energy Frontier, Neutrino Frontier, Rare Processes and Precision Measurements, Cosmic Frontier, Theory Frontier,Neutrino Frontier, Accelerator Frontier,Energy Frontier, Cosmic Frontier, Instrumentation Frontier, Computational Frontier,Neutrino Frontier, Theory Frontier,Cosmic Frontier, Computational Frontier,Accelerator Frontier, Computational Frontier,Energy Frontier, Rare Processes and Precision Measurements, Accelerator Frontier, Instrumentation Frontier,Neutrino Frontier, Rare Processes and Precision Measurements, Cosmic Frontier, Instrumentation Frontier, Computational Frontier, Underground Facilities, Community Engagement,Energy Frontier, Rare Processes and Precision Measurements, Cosmic Frontier, Computational Frontier,Energy Frontier, Rare Processes and Precision Measurements, Cosmic Frontier, Theory Frontier, Computational Frontier, Community Engagement,Energy Frontier, Theory Frontier, Accelerator Frontier, Community Engagement,Rare Processes and Precision Measurements, Cosmic Frontier, Theory Frontier,Energy Frontier, Neutrino Frontier, Cosmic Frontier,Neutrino Frontier, Cosmic Frontier, Theory Frontier,Instrumentation Frontier,Rare Processes and Precision Measurements, Cosmic Frontier, Underground Facilities,Energy Frontier, Rare Processes and Precision Measurements, Theory Frontier,Rare Processes and Precision Measurements, Computational Frontier,Neutrino Frontier, Cosmic Frontier, Computational Frontier,Energy Frontier, Neutrino Frontier, Rare Processes and Precision Measurements, Cosmic Frontier, Accelerator Frontier, Instrumentation Frontier,Cosmic Frontier, Underground Facilities,Energy Frontier, Theory Frontier, Computational Frontier, Community Engagement,Cosmic Frontier, Theory Frontier, Instrumentation Frontier, Underground Facilities,Neutrino Frontier, Cosmic Frontier, Instrumentation Frontier, Underground Facilities,Energy Frontier, Cosmic Frontier, Computational Frontier,Energy Frontier, Neutrino Frontier, Cosmic Frontier, Theory Frontier, Accelerator Frontier,Neutrino Frontier, Cosmic Frontier,Energy Frontier, Neutrino Frontier,Energy Frontier, Rare Processes and Precision Measurements, Accelerator Frontier,Neutrino Frontier, Rare Processes and Precision Measurements, Theory Frontier, Computational Frontier,Neutrino Frontier, Instrumentation Frontier,Neutrino Frontier, Rare Processes and Precision Measurements, Cosmic Frontier, Instrumentation Frontier, Underground Facilities,Neutrino Frontier, Rare Processes and Precision Measurements,Neutrino Frontier, Rare Processes and Precision Measurements, Cosmic Frontier,Accelerator Frontier, Community Engagement,Community Engagement,Cosmic Frontier, Instrumentation Frontier, Underground Facilities,Neutrino Frontier, Theory Frontier, Accelerator Frontier,Energy Frontier, Neutrino Frontier, Cosmic Frontier, Accelerator Frontier,Neutrino Frontier, Instrumentation Frontier, Computational Frontier,Neutrino Frontier, Cosmic Frontier, Computational Frontier, Community Engagement,Cosmic Frontier, Theory Frontier, Computational Frontier, Community Engagement,Energy Frontier, Neutrino Frontier, Theory Frontier, Accelerator Frontier, Computational Frontier,Energy Frontier, Neutrino Frontier, Rare Processes and Precision Measurements, Theory Frontier, Instrumentation Frontier,Theory Frontier, Computational Frontier, Community Engagement,Rare Processes and Precision Measurements, Theory Frontier, Computational Frontier,Energy Frontier, Neutrino Frontier, Rare Processes and Precision Measurements, Cosmic Frontier, Theory Frontier, Accelerator Frontier, Instrumentation Frontier, Computational Frontier, Underground Facilities, Community Engagement,Accelerator Frontier, Computational Frontier, Community Engagement,Energy Frontier, Cosmic Frontier, Accelerator Frontier,Underground Facilities,Energy Frontier, Neutrino Frontier, Theory Frontier,Energy Frontier, Neutrino Frontier, Cosmic Frontier, Theory Frontier, Computational Frontier, Community Engagement,Energy Frontier, Rare Processes and Precision Measurements, Computational Frontier,Instrumentation Frontier, Computational Frontier,Energy Frontier, Cosmic Frontier, Theory Frontier, Accelerator Frontier,Energy Frontier, Neutrino Frontier, Rare Processes and Precision Measurements, Instrumentation Frontier, Underground Facilities,Rare Processes and Precision Measurements, Computational Frontier, Community Engagement,Cosmic Frontier, Theory Frontier, Computational Frontier,Rare Processes and Precision Measurements, Accelerator Frontier,Energy Frontier, Neutrino Frontier, Theory Frontier, Accelerator Frontier,Neutrino Frontier, Cosmic Frontier, Instrumentation Frontier, Computational Frontier,Energy Frontier, Cosmic Frontier, Theory Frontier, Community Engagement,Neutrino Frontier, Rare Processes and Precision Measurements, Instrumentation Frontier, Underground Facilities,Energy Frontier, Accelerator Frontier, Instrumentation Frontier, Community Engagement,Neutrino Frontier, Cosmic Frontier, Underground Facilities,Neutrino Frontier, Rare Processes and Precision Measurements, Theory Frontier, Community Engagement,Rare Processes and Precision Measurements, Cosmic Frontier, Instrumentation Frontier,Rare Processes and Precision Measurements, Instrumentation Frontier, Computational Frontier,Energy Frontier, Neutrino Frontier, Accelerator Frontier,Energy Frontier, Cosmic Frontier, Theory Frontier, Computational Frontier,Neutrino Frontier, Cosmic Frontier, Theory Frontier, Community Engagement,Energy Frontier, Theory Frontier, Accelerator Frontier,Neutrino Frontier, Underground Facilities,Rare Processes and Precision Measurements, Underground Facilities,Neutrino Frontier, Rare Processes and Precision Measurements, Computational Frontier,Instrumentation Frontier, Underground Facilities, Community Engagement,Neutrino Frontier, Underground Facilities, Community Engagement,Energy Frontier, Rare Processes and Precision Measurements, Computational Frontier, Community Engagement,Energy Frontier, Neutrino Frontier, Rare Processes and Precision Measurements,Energy Frontier, Accelerator Frontier, Community Engagement,Energy Frontier, Neutrino Frontier, Rare Processes and Precision Measurements, Cosmic Frontier, Instrumentation Frontier,Energy Frontier, Neutrino Frontier, Rare Processes and Precision Measurements, Theory Frontier, Computational Frontier,Neutrino Frontier, Cosmic Frontier, Community Engagement,Energy Frontier, Rare Processes and Precision Measurements, Instrumentation Frontier,Energy Frontier, Neutrino Frontier, Instrumentation Frontier, Underground Facilities,Neutrino Frontier, Rare Processes and Precision Measurements, Accelerator Frontier,Neutrino Frontier, Accelerator Frontier, Instrumentation Frontier,Energy Frontier, Neutrino Frontier, Rare Processes and Precision Measurements, Accelerator Frontier,Energy Frontier, Cosmic Frontier, Community Engagement,Neutrino Frontier, Cosmic Frontier, Theory Frontier, Computational Frontier,Energy Frontier, Neutrino Frontier, Computational Frontier, Underground Facilities,Energy Frontier, Neutrino Frontier, Accelerator Frontier, Instrumentation Frontier,Energy Frontier, Rare Processes and Precision Measurements, Community Engagement,Neutrino Frontier, Accelerator Frontier, Underground Facilities,Neutrino Frontier, Instrumentation Frontier, Underground Facilities, Community Engagement,Energy Frontier, Cosmic Frontier, Instrumentation Frontier, Underground Facilities,Energy Frontier, Cosmic Frontier, Theory Frontier, Computational Frontier, Community Engagement,Neutrino Frontier, Accelerator Frontier, Instrumentation Frontier, Computational Frontier, Underground Facilities, Community Engagement,Neutrino Frontier, Rare Processes and Precision Measurements, Instrumentation Frontier, Computational Frontier,Neutrino Frontier, Theory Frontier, Computational Frontier&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">raw_survey</span><span class="p">[</span><span class="n">c_frontier</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0                                                    NaN
+1                                                    NaN
+2      Neutrino Frontier, Rare Processes and Precisio...
+3                Energy Frontier, Computational Frontier
+4      Neutrino Frontier, Theory Frontier, Community ...
+                             ...                        
+723                Energy Frontier, Accelerator Frontier
+724    Energy Frontier, Cosmic Frontier, Theory Front...
+725                                      Cosmic Frontier
+726    Energy Frontier, Instrumentation Frontier, Com...
+727                                 Accelerator Frontier
+Name: I primarily am interested in sessions associated with:, Length: 728, dtype: object
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="writing-out-the-file">
+<h2>Writing out the file<a class="headerlink" href="#writing-out-the-file" title="Permalink to this headline">¶</a></h2>
+<p>As a WARNING: Never check this in!</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">survey</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;/workspaces/snowmass-attendance/clean_survey.csv&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="intro.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Seattle Summer Snowmass Meeting Attendance Survey Results</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="markdown.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Markdown Files</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By The Seattle Summer Snowmass Local Organizing Committee<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>
