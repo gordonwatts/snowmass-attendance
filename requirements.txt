@@ -1,0 +1,9 @@
+jupyterlab
+jupyterbook
+wheel
+wordcloud
+matplotlib
+pandas
+seaborn
+black
+altair
