@@ -283,7 +283,7 @@
 <div class="section" id="some-high-level-results">
 <h2>Some High Level Results<a class="headerlink" href="#some-high-level-results" title="Permalink to this headline">¶</a></h2>
 <p>First - how many people answered and how did they answer over time?</p>
-<div class="cell docutils container">
+<div class="cell tag_hide-input docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Number of people that responded: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">survey</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 </pre></div>
@@ -295,7 +295,7 @@
 </div>
 </div>
 </div>
-<div class="cell docutils container">
+<div class="cell tag_hide-input docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">survey</span><span class="o">.</span><span class="n">time</span><span class="p">),</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">survey</span><span class="p">)))</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
@@ -308,7 +308,7 @@
 </div>
 <p>You can see exactly when the email reminders were sent out to the main mailing lists.</p>
 <p>Some generic info about the people that responded - by frontier and by level.</p>
-<div class="cell docutils container">
+<div class="cell tag_hide-input docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">brush</span> <span class="o">=</span> <span class="n">alt</span><span class="o">.</span><span class="n">selection_single</span><span class="p">(</span><span class="n">encodings</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">])</span>
 
@@ -339,13 +339,13 @@
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html">
-<div id="altair-viz-d00db79a43744d4fb0d77d8cb024eb33"></div>
+<div id="altair-viz-7777e54e4c794ed482133dc28b552249"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-d00db79a43744d4fb0d77d8cb024eb33") {
-      outputDiv = document.getElementById("altair-viz-d00db79a43744d4fb0d77d8cb024eb33");
+    if (outputDiv.id !== "altair-viz-7777e54e4c794ed482133dc28b552249") {
+      outputDiv = document.getElementById("altair-viz-7777e54e4c794ed482133dc28b552249");
     }
     const paths = {
       "vega": "https://cdn.jsdelivr.net/npm//vega@5?noext",
