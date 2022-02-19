@@ -4,6 +4,5 @@
 format: jb-book
 root: intro
 chapters:
+- file: attend
 - file: cleaning
-- file: markdown
-- file: notebooks
