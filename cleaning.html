@@ -54,8 +54,7 @@
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Markdown Files" href="markdown.html" />
-    <link rel="prev" title="Seattle Summer Snowmass Meeting Attendance Survey Results" href="intro.html" />
+    <link rel="prev" title="Attendance Details" href="attend.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -100,19 +99,14 @@
  </li>
 </ul>
 <ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="attend.html">
+   Attendance Details
+  </a>
+ </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
    Data Cleaning
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="markdown.html">
-   Markdown Files
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="notebooks.html">
-   Content with notebooks
   </a>
  </li>
 </ul>
@@ -235,6 +229,16 @@
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#attending">
+   Attending
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#dinner">
+   Dinner
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#frontier">
    Frontier
   </a>
@@ -277,6 +281,16 @@
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#rank">
    Rank
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#attending">
+   Attending
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#dinner">
+   Dinner
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -548,6 +562,67 @@
 </div>
 </div>
 </div>
+<div class="section" id="attending">
+<h2>Attending<a class="headerlink" href="#attending" title="Permalink to this headline">¶</a></h2>
+<p>Would you attend the workshop. While we designed the survey with no options, someone slipped a <code class="docutils literal notranslate"><span class="pre">Yes</span></code> in there, which we need to map back to the other values.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">c_attend</span> <span class="o">=</span> <span class="s2">&quot;Setting aside the COVID, funding, etc issues for the moment, would you attend the Snowmass Summer Workshop in person?&quot;</span>
+<span class="n">raw_survey</span><span class="p">[</span><span class="n">c_attend</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([&#39;Yes&#39;, &#39;Would attend&#39;, &#39;Might attend&#39;, &#39;Would not attend&#39;],
+      dtype=object)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">attend_t</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;Yes&#39;</span><span class="p">:</span> <span class="s1">&#39;Would attend&#39;</span><span class="p">,</span> 
+    <span class="s1">&#39;Would attend&#39;</span><span class="p">:</span> <span class="s1">&#39;Would attend&#39;</span><span class="p">,</span> 
+    <span class="s1">&#39;Might attend&#39;</span><span class="p">:</span> <span class="s1">&#39;Might attend&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Would not attend&#39;</span><span class="p">:</span> <span class="s1">&#39;Would not attend&#39;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">survey</span><span class="p">[</span><span class="s2">&quot;attend&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">raw_survey</span><span class="p">[</span><span class="n">c_attend</span><span class="p">]</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="k">lambda</span> <span class="n">i</span><span class="p">:</span> <span class="n">attend_t</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="dinner">
+<h2>Dinner<a class="headerlink" href="#dinner" title="Permalink to this headline">¶</a></h2>
+<p>No need to convert this - there were no optional values!</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">c_dinner</span> <span class="o">=</span> <span class="s2">&quot;If you attended the conference, would you also attend the dinner?&quot;</span>
+<span class="n">raw_survey</span><span class="p">[</span><span class="n">c_dinner</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([&#39;No&#39;, &#39;Yes&#39;, &#39;Maybe&#39;], dtype=object)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">survey</span><span class="p">[</span><span class="s2">&quot;dinner&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">raw_survey</span><span class="p">[</span><span class="n">c_dinner</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
 <div class="section" id="frontier">
 <h2>Frontier<a class="headerlink" href="#frontier" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
@@ -625,19 +700,12 @@ Name: I primarily am interested in sessions associated with:, Length: 728, dtype
             
                 <!-- Previous / next buttons -->
 <div class='prev-next-area'> 
-    <a class='left-prev' id="prev-link" href="intro.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="attend.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Seattle Summer Snowmass Meeting Attendance Survey Results</p>
+            <p class="prev-next-title">Attendance Details</p>
         </div>
-    </a>
-    <a class='right-next' id="next-link" href="markdown.html" title="next page">
-    <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Markdown Files</p>
-    </div>
-    <i class="fas fa-angle-right"></i>
     </a>
 </div>
             
