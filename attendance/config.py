@@ -1,5 +1,6 @@
 import pandas as pd
 import matplotlib.pyplot as plt
+import altair as alt
 
 # Defaults for matplot lib
 plt.rcParams["figure.figsize"] = (10, 7)
@@ -30,3 +31,6 @@ survey = pd.read_csv('/workspaces/snowmass-attendance/clean_survey.csv')
 # # c_rank = "I am a"
 # # c_travel = "If I attend Snowmass, I will be traveling"
 # # c_management = "Are you part of the Snowmass Management Team (frontier group or sub-group convener, etc.)?"
+
+# Some colors ot help out
+default_color = alt.value("#1f77b4")
