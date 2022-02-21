@@ -234,6 +234,11 @@
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#attendance-feedback">
+   Attendance Feedback
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#dinner">
    Dinner
   </a>
@@ -286,6 +291,11 @@
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#attending">
    Attending
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#attendance-feedback">
+   Attendance Feedback
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -594,6 +604,73 @@
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">survey</span><span class="p">[</span><span class="s2">&quot;attend&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">raw_survey</span><span class="p">[</span><span class="n">c_attend</span><span class="p">]</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="k">lambda</span> <span class="n">i</span><span class="p">:</span> <span class="n">attend_t</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="attendance-feedback">
+<h2>Attendance Feedback<a class="headerlink" href="#attendance-feedback" title="Permalink to this headline">¶</a></h2>
+<p>The text feedback has to be done as a giant set of text strings, so no cleaning here.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">c_attendance_feedback</span> <span class="o">=</span> <span class="s2">&quot;If you&#39;d like to say a few words to expand on the answer, please do!&quot;</span>
+<span class="n">survey</span><span class="p">[</span><span class="s2">&quot;attend_feedback&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">raw_survey</span><span class="p">[</span><span class="n">c_attendance_feedback</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">c_worried_covid</span> <span class="o">=</span> <span class="s2">&quot;Please indicate how worried you are about each issue that might prevent you from attending: [COVID]&quot;</span>
+<span class="n">c_worried_funding</span> <span class="o">=</span> <span class="s2">&quot;Please indicate how worried you are about each issue that might prevent you from attending: [Funding]&quot;</span>
+<span class="n">c_worried_length</span> <span class="o">=</span> <span class="s2">&quot;Please indicate how worried you are about each issue that might prevent you from attending: [Length of the Workshop]&quot;</span>
+<span class="n">c_worried_accessibility</span> <span class="o">=</span> <span class="s2">&quot;Please indicate how worried you are about each issue that might prevent you from attending: [Accessibility/Accommodation]&quot;</span>
+<span class="n">c_worried_responsibilities</span> <span class="o">=</span> <span class="s2">&quot;Please indicate how worried you are about each issue that might prevent you from attending: [Competing Responsibilities]&quot;</span>
+<span class="n">raw_survey</span><span class="p">[</span><span class="n">c_worried_covid</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([&#39;Very worried&#39;, &#39;Might prevent me from attending&#39;,
+       &#39;Likely will prevent me from attending&#39;,
+       &#39;Could attend, but might limit participation&#39;, &#39;Not a concern&#39;],
+      dtype=object)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">worried_t</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;Very worried&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s1">&#39;Likely will prevent me from attending&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s1">&#39;Might prevent me from attending&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="s1">&#39;Could attend, but might limit participation&#39;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+    <span class="s1">&#39;A little worried&#39;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+    <span class="s1">&#39;Not a concern&#39;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+    <span class="s1">&#39;No Worried&#39;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+    <span class="s1">&#39;Unknown&#39;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">survey</span><span class="p">[</span><span class="s1">&#39;worried_covid&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">raw_survey</span><span class="p">[</span><span class="n">c_worried_covid</span><span class="p">]</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="k">lambda</span> <span class="n">i</span><span class="p">:</span> <span class="n">worried_t</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+<span class="n">survey</span><span class="p">[</span><span class="s1">&#39;worried_funding&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">raw_survey</span><span class="p">[</span><span class="n">c_worried_funding</span><span class="p">]</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="k">lambda</span> <span class="n">i</span><span class="p">:</span> <span class="n">worried_t</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+<span class="n">survey</span><span class="p">[</span><span class="s1">&#39;worried_length&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">raw_survey</span><span class="p">[</span><span class="n">c_worried_length</span><span class="p">]</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="k">lambda</span> <span class="n">i</span><span class="p">:</span> <span class="n">worried_t</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+<span class="n">survey</span><span class="p">[</span><span class="s1">&#39;worried_accessibility&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">raw_survey</span><span class="p">[</span><span class="n">c_worried_accessibility</span><span class="p">]</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="k">lambda</span> <span class="n">i</span><span class="p">:</span> <span class="n">worried_t</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+<span class="n">survey</span><span class="p">[</span><span class="s1">&#39;worried_responsibilities&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">raw_survey</span><span class="p">[</span><span class="n">c_worried_responsibilities</span><span class="p">]</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="k">lambda</span> <span class="n">i</span><span class="p">:</span> <span class="n">worried_t</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="k">else</span> <span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">c_other_issues</span> <span class="o">=</span> <span class="s2">&quot;If there are other issues that concern you that are not listed above, please indicate here!&quot;</span>
+<span class="n">survey</span><span class="p">[</span><span class="s1">&#39;attend_other_concerns&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">raw_survey</span><span class="p">[</span><span class="n">c_other_issues</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
