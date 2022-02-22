@@ -54,7 +54,7 @@
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="prev" title="Attendance Details" href="attend.html" />
+    <link rel="prev" title="COVID" href="covid.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -94,7 +94,7 @@
         <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="intro.html">
-   Seattle Summer Snowmass Meeting Attendance Survey Results
+   Introduction
   </a>
  </li>
 </ul>
@@ -107,6 +107,11 @@
  <li class="toctree-l1">
   <a class="reference internal" href="attend.html">
    Attendance Details
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="covid.html">
+   COVID
   </a>
  </li>
  <li class="toctree-l1 current active">
@@ -264,6 +269,11 @@
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#covid-and-attending">
+   COVID and Attending
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#writing-out-the-file">
    Writing out the file
   </a>
@@ -331,6 +341,11 @@
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#frontier">
    Frontier
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#covid-and-attending">
+   COVID and Attending
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -782,6 +797,35 @@
 </div>
 </div>
 </div>
+<div class="section" id="covid-and-attending">
+<h2>COVID and Attending<a class="headerlink" href="#covid-and-attending" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">c_covid</span> <span class="o">=</span> <span class="s2">&quot;The points below are labeled on the case/day plot above. Please indicate the largest USA new case-load/day rate for which you&#39;d be willing to attend Snowmass in person.&quot;</span>
+<span class="n">covid_t</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;Point A&#39;</span><span class="p">:</span> <span class="s1">&#39;A&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Point B&#39;</span><span class="p">:</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Point C&#39;</span><span class="p">:</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Point D&#39;</span><span class="p">:</span> <span class="s1">&#39;D&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Point E&#39;</span><span class="p">:</span> <span class="s1">&#39;E&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Poing E&#39;</span><span class="p">:</span> <span class="s1">&#39;E&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Not com&#39;</span><span class="p">:</span> <span class="s1">&#39;At No Level&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;My inst&#39;</span><span class="p">:</span> <span class="s1">&#39;Travel Restrictions&#39;</span>
+<span class="p">}</span>
+<span class="n">survey</span><span class="p">[</span><span class="s1">&#39;covid_comfort&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">raw_survey</span><span class="p">[</span><span class="n">c_covid</span><span class="p">]</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="k">lambda</span> <span class="n">v</span><span class="p">:</span> <span class="n">covid_t</span><span class="p">[</span><span class="n">v</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">7</span><span class="p">]])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">c_covid_comments</span> <span class="o">=</span> <span class="s2">&quot;There is no way to get everyone&#39;s full perspective with a multiple choice question like that. Please feel free to add a sentence or so if you wish!&quot;</span>
+<span class="n">survey</span><span class="p">[</span><span class="s1">&#39;covid_comments&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">raw_survey</span><span class="p">[</span><span class="n">c_covid_comments</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
 <div class="section" id="writing-out-the-file">
 <h2>Writing out the file<a class="headerlink" href="#writing-out-the-file" title="Permalink to this headline">¶</a></h2>
 <p>As a WARNING: Never check this in!</p>
@@ -820,11 +864,11 @@
             
                 <!-- Previous / next buttons -->
 <div class='prev-next-area'> 
-    <a class='left-prev' id="prev-link" href="attend.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="covid.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Attendance Details</p>
+            <p class="prev-next-title">COVID</p>
         </div>
     </a>
 </div>
