@@ -100,6 +100,11 @@
 </ul>
 <ul class="current nav bd-sidenav">
  <li class="toctree-l1">
+  <a class="reference internal" href="demographics.html">
+   Demographics Responses
+  </a>
+ </li>
+ <li class="toctree-l1">
   <a class="reference internal" href="attend.html">
    Attendance Details
   </a>
@@ -239,6 +244,16 @@
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#travel">
+   Travel
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#management">
+   Management
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#dinner">
    Dinner
   </a>
@@ -299,6 +314,16 @@
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#travel">
+   Travel
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#management">
+   Management
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#dinner">
    Dinner
   </a>
@@ -329,7 +354,8 @@
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">import</span> <span class="nn">math</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
 <span class="n">raw_survey</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;/workspaces/snowmass-attendance/survey.csv&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -676,6 +702,29 @@
 </div>
 </div>
 </div>
+<div class="section" id="travel">
+<h2>Travel<a class="headerlink" href="#travel" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">c_travel</span> <span class="o">=</span> <span class="s2">&quot;If I attend Snowmass, I will be traveling&quot;</span>
+<span class="n">survey</span><span class="p">[</span><span class="s1">&#39;travel&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">raw_survey</span><span class="p">[</span><span class="n">c_travel</span><span class="p">]</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="k">lambda</span> <span class="n">v</span><span class="p">:</span> <span class="n">v</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="k">else</span> <span class="s2">&quot;Unknown&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="management">
+<h2>Management<a class="headerlink" href="#management" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">c_management</span><span class="o">=</span><span class="s2">&quot;Are you part of the Snowmass Management Team (frontier group or sub-group convener, etc.)?&quot;</span>
+<span class="n">raw_survey</span><span class="p">[</span><span class="n">c_management</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
+<span class="n">survey</span><span class="p">[</span><span class="s1">&#39;management&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">raw_survey</span><span class="p">[</span><span class="n">c_management</span><span class="p">]</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="k">lambda</span> <span class="n">v</span><span class="p">:</span> <span class="n">v</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="k">else</span> <span class="s2">&quot;Unknown&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
 <div class="section" id="dinner">
 <h2>Dinner<a class="headerlink" href="#dinner" title="Permalink to this headline">¶</a></h2>
 <p>No need to convert this - there were no optional values!</p>
@@ -702,38 +751,32 @@
 </div>
 <div class="section" id="frontier">
 <h2>Frontier<a class="headerlink" href="#frontier" title="Permalink to this headline">¶</a></h2>
+<p>This is a bit difficult b.c each item is comma separated list, which is not very amenable to manipulation. We will convert to using the abreviations and also to converting it to separate columns.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">c_frontier</span> <span class="o">=</span> <span class="s2">&quot;I primarily am interested in sessions associated with:&quot;</span>
-<span class="s1">&#39;,&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">list</span><span class="p">((</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">raw_survey</span><span class="p">[</span><span class="n">c_frontier</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">())))</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;nan,Neutrino Frontier, Rare Processes and Precision Measurements, Instrumentation Frontier, Community Engagement,Energy Frontier, Computational Frontier,Neutrino Frontier, Theory Frontier, Community Engagement,Cosmic Frontier, Theory Frontier,Cosmic Frontier, Community Engagement,Neutrino Frontier, Computational Frontier,Cosmic Frontier, Computational Frontier, Community Engagement,Theory Frontier, Computational Frontier,Neutrino Frontier, Rare Processes and Precision Measurements, Cosmic Frontier, Underground Facilities,Energy Frontier, Cosmic Frontier, Theory Frontier,Energy Frontier, Accelerator Frontier, Instrumentation Frontier, Computational Frontier,Energy Frontier, Neutrino Frontier, Computational Frontier, Community Engagement,Neutrino Frontier, Instrumentation Frontier, Underground Facilities,Neutrino Frontier,Energy Frontier, Neutrino Frontier, Rare Processes and Precision Measurements, Cosmic Frontier, Theory Frontier, Accelerator Frontier,Neutrino Frontier, Community Engagement,Neutrino Frontier, Rare Processes and Precision Measurements, Underground Facilities,Cosmic Frontier, Instrumentation Frontier,Energy Frontier, Computational Frontier, Community Engagement,Rare Processes and Precision Measurements, Cosmic Frontier,Energy Frontier,Cosmic Frontier, Instrumentation Frontier, Computational Frontier, Community Engagement,Energy Frontier, Community Engagement,Computational Frontier,Cosmic Frontier,Rare Processes and Precision Measurements, Theory Frontier,Energy Frontier, Theory Frontier,Rare Processes and Precision Measurements,Rare Processes and Precision Measurements, Accelerator Frontier, Computational Frontier,Energy Frontier, Neutrino Frontier, Cosmic Frontier, Theory Frontier, Computational Frontier,Neutrino Frontier, Cosmic Frontier, Instrumentation Frontier,Neutrino Frontier, Rare Processes and Precision Measurements, Instrumentation Frontier,Neutrino Frontier, Rare Processes and Precision Measurements, Cosmic Frontier, Theory Frontier,Rare Processes and Precision Measurements, Accelerator Frontier, Instrumentation Frontier,Energy Frontier, Neutrino Frontier, Cosmic Frontier, Theory Frontier,Energy Frontier, Accelerator Frontier, Instrumentation Frontier, Computational Frontier, Community Engagement,Energy Frontier, Rare Processes and Precision Measurements, Instrumentation Frontier, Computational Frontier,Neutrino Frontier, Rare Processes and Precision Measurements, Theory Frontier,Energy Frontier, Instrumentation Frontier,Theory Frontier,Energy Frontier, Cosmic Frontier, Instrumentation Frontier,Energy Frontier, Neutrino Frontier, Rare Processes and Precision Measurements, Theory Frontier,Energy Frontier, Accelerator Frontier, Instrumentation Frontier,Energy Frontier, Rare Processes and Precision Measurements,Energy Frontier, Theory Frontier, Computational Frontier,Energy Frontier, Accelerator Frontier, Computational Frontier,Energy Frontier, Neutrino Frontier, Theory Frontier, Computational Frontier,Energy Frontier, Neutrino Frontier, Rare Processes and Precision Measurements, Theory Frontier, Accelerator Frontier, Instrumentation Frontier,Energy Frontier, Cosmic Frontier,Rare Processes and Precision Measurements, Theory Frontier, Accelerator Frontier,Energy Frontier, Instrumentation Frontier, Computational Frontier,Energy Frontier, Rare Processes and Precision Measurements, Cosmic Frontier,Energy Frontier, Neutrino Frontier, Rare Processes and Precision Measurements, Cosmic Frontier, Theory Frontier, Accelerator Frontier, Instrumentation Frontier,Energy Frontier, Rare Processes and Precision Measurements, Theory Frontier, Computational Frontier,Accelerator Frontier,Rare Processes and Precision Measurements, Instrumentation Frontier,Energy Frontier, Rare Processes and Precision Measurements, Cosmic Frontier, Theory Frontier,Energy Frontier, Theory Frontier, Accelerator Frontier, Instrumentation Frontier,Energy Frontier, Neutrino Frontier, Instrumentation Frontier,Energy Frontier, Accelerator Frontier,Energy Frontier, Neutrino Frontier, Rare Processes and Precision Measurements, Cosmic Frontier, Theory Frontier,Neutrino Frontier, Accelerator Frontier,Energy Frontier, Cosmic Frontier, Instrumentation Frontier, Computational Frontier,Neutrino Frontier, Theory Frontier,Cosmic Frontier, Computational Frontier,Accelerator Frontier, Computational Frontier,Energy Frontier, Rare Processes and Precision Measurements, Accelerator Frontier, Instrumentation Frontier,Neutrino Frontier, Rare Processes and Precision Measurements, Cosmic Frontier, Instrumentation Frontier, Computational Frontier, Underground Facilities, Community Engagement,Energy Frontier, Rare Processes and Precision Measurements, Cosmic Frontier, Computational Frontier,Energy Frontier, Rare Processes and Precision Measurements, Cosmic Frontier, Theory Frontier, Computational Frontier, Community Engagement,Energy Frontier, Theory Frontier, Accelerator Frontier, Community Engagement,Rare Processes and Precision Measurements, Cosmic Frontier, Theory Frontier,Energy Frontier, Neutrino Frontier, Cosmic Frontier,Neutrino Frontier, Cosmic Frontier, Theory Frontier,Instrumentation Frontier,Rare Processes and Precision Measurements, Cosmic Frontier, Underground Facilities,Energy Frontier, Rare Processes and Precision Measurements, Theory Frontier,Rare Processes and Precision Measurements, Computational Frontier,Neutrino Frontier, Cosmic Frontier, Computational Frontier,Energy Frontier, Neutrino Frontier, Rare Processes and Precision Measurements, Cosmic Frontier, Accelerator Frontier, Instrumentation Frontier,Cosmic Frontier, Underground Facilities,Energy Frontier, Theory Frontier, Computational Frontier, Community Engagement,Cosmic Frontier, Theory Frontier, Instrumentation Frontier, Underground Facilities,Neutrino Frontier, Cosmic Frontier, Instrumentation Frontier, Underground Facilities,Energy Frontier, Cosmic Frontier, Computational Frontier,Energy Frontier, Neutrino Frontier, Cosmic Frontier, Theory Frontier, Accelerator Frontier,Neutrino Frontier, Cosmic Frontier,Energy Frontier, Neutrino Frontier,Energy Frontier, Rare Processes and Precision Measurements, Accelerator Frontier,Neutrino Frontier, Rare Processes and Precision Measurements, Theory Frontier, Computational Frontier,Neutrino Frontier, Instrumentation Frontier,Neutrino Frontier, Rare Processes and Precision Measurements, Cosmic Frontier, Instrumentation Frontier, Underground Facilities,Neutrino Frontier, Rare Processes and Precision Measurements,Neutrino Frontier, Rare Processes and Precision Measurements, Cosmic Frontier,Accelerator Frontier, Community Engagement,Community Engagement,Cosmic Frontier, Instrumentation Frontier, Underground Facilities,Neutrino Frontier, Theory Frontier, Accelerator Frontier,Energy Frontier, Neutrino Frontier, Cosmic Frontier, Accelerator Frontier,Neutrino Frontier, Instrumentation Frontier, Computational Frontier,Neutrino Frontier, Cosmic Frontier, Computational Frontier, Community Engagement,Cosmic Frontier, Theory Frontier, Computational Frontier, Community Engagement,Energy Frontier, Neutrino Frontier, Theory Frontier, Accelerator Frontier, Computational Frontier,Energy Frontier, Neutrino Frontier, Rare Processes and Precision Measurements, Theory Frontier, Instrumentation Frontier,Theory Frontier, Computational Frontier, Community Engagement,Rare Processes and Precision Measurements, Theory Frontier, Computational Frontier,Energy Frontier, Neutrino Frontier, Rare Processes and Precision Measurements, Cosmic Frontier, Theory Frontier, Accelerator Frontier, Instrumentation Frontier, Computational Frontier, Underground Facilities, Community Engagement,Accelerator Frontier, Computational Frontier, Community Engagement,Energy Frontier, Cosmic Frontier, Accelerator Frontier,Underground Facilities,Energy Frontier, Neutrino Frontier, Theory Frontier,Energy Frontier, Neutrino Frontier, Cosmic Frontier, Theory Frontier, Computational Frontier, Community Engagement,Energy Frontier, Rare Processes and Precision Measurements, Computational Frontier,Instrumentation Frontier, Computational Frontier,Energy Frontier, Cosmic Frontier, Theory Frontier, Accelerator Frontier,Energy Frontier, Neutrino Frontier, Rare Processes and Precision Measurements, Instrumentation Frontier, Underground Facilities,Rare Processes and Precision Measurements, Computational Frontier, Community Engagement,Cosmic Frontier, Theory Frontier, Computational Frontier,Rare Processes and Precision Measurements, Accelerator Frontier,Energy Frontier, Neutrino Frontier, Theory Frontier, Accelerator Frontier,Neutrino Frontier, Cosmic Frontier, Instrumentation Frontier, Computational Frontier,Energy Frontier, Cosmic Frontier, Theory Frontier, Community Engagement,Neutrino Frontier, Rare Processes and Precision Measurements, Instrumentation Frontier, Underground Facilities,Energy Frontier, Accelerator Frontier, Instrumentation Frontier, Community Engagement,Neutrino Frontier, Cosmic Frontier, Underground Facilities,Neutrino Frontier, Rare Processes and Precision Measurements, Theory Frontier, Community Engagement,Rare Processes and Precision Measurements, Cosmic Frontier, Instrumentation Frontier,Rare Processes and Precision Measurements, Instrumentation Frontier, Computational Frontier,Energy Frontier, Neutrino Frontier, Accelerator Frontier,Energy Frontier, Cosmic Frontier, Theory Frontier, Computational Frontier,Neutrino Frontier, Cosmic Frontier, Theory Frontier, Community Engagement,Energy Frontier, Theory Frontier, Accelerator Frontier,Neutrino Frontier, Underground Facilities,Rare Processes and Precision Measurements, Underground Facilities,Neutrino Frontier, Rare Processes and Precision Measurements, Computational Frontier,Instrumentation Frontier, Underground Facilities, Community Engagement,Neutrino Frontier, Underground Facilities, Community Engagement,Energy Frontier, Rare Processes and Precision Measurements, Computational Frontier, Community Engagement,Energy Frontier, Neutrino Frontier, Rare Processes and Precision Measurements,Energy Frontier, Accelerator Frontier, Community Engagement,Energy Frontier, Neutrino Frontier, Rare Processes and Precision Measurements, Cosmic Frontier, Instrumentation Frontier,Energy Frontier, Neutrino Frontier, Rare Processes and Precision Measurements, Theory Frontier, Computational Frontier,Neutrino Frontier, Cosmic Frontier, Community Engagement,Energy Frontier, Rare Processes and Precision Measurements, Instrumentation Frontier,Energy Frontier, Neutrino Frontier, Instrumentation Frontier, Underground Facilities,Neutrino Frontier, Rare Processes and Precision Measurements, Accelerator Frontier,Neutrino Frontier, Accelerator Frontier, Instrumentation Frontier,Energy Frontier, Neutrino Frontier, Rare Processes and Precision Measurements, Accelerator Frontier,Energy Frontier, Cosmic Frontier, Community Engagement,Neutrino Frontier, Cosmic Frontier, Theory Frontier, Computational Frontier,Energy Frontier, Neutrino Frontier, Computational Frontier, Underground Facilities,Energy Frontier, Neutrino Frontier, Accelerator Frontier, Instrumentation Frontier,Energy Frontier, Rare Processes and Precision Measurements, Community Engagement,Neutrino Frontier, Accelerator Frontier, Underground Facilities,Neutrino Frontier, Instrumentation Frontier, Underground Facilities, Community Engagement,Energy Frontier, Cosmic Frontier, Instrumentation Frontier, Underground Facilities,Energy Frontier, Cosmic Frontier, Theory Frontier, Computational Frontier, Community Engagement,Neutrino Frontier, Accelerator Frontier, Instrumentation Frontier, Computational Frontier, Underground Facilities, Community Engagement,Neutrino Frontier, Rare Processes and Precision Measurements, Instrumentation Frontier, Computational Frontier,Neutrino Frontier, Theory Frontier, Computational Frontier&#39;
+<span class="n">frontier_mapping</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;Neutrino Frontier&#39;</span><span class="p">:</span> <span class="s1">&#39;NF&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Energy Frontier&#39;</span><span class="p">:</span> <span class="s1">&#39;EF&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Rare Processes and Precision Measurements&#39;</span><span class="p">:</span> <span class="s1">&#39;RF&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Cosmic Frontier&#39;</span><span class="p">:</span> <span class="s1">&#39;CF&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Theory Frontier&#39;</span><span class="p">:</span> <span class="s1">&#39;TF&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Accelerator Frontier&#39;</span><span class="p">:</span> <span class="s1">&#39;AF&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Instrumentation Frontier&#39;</span><span class="p">:</span> <span class="s1">&#39;IF&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Computational Frontier&#39;</span><span class="p">:</span> <span class="s2">&quot;CompF&quot;</span><span class="p">,</span>
+    <span class="s1">&#39;Underground Facilities&#39;</span><span class="p">:</span> <span class="s1">&#39;UF&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Community Engagement&#39;</span><span class="p">:</span> <span class="s1">&#39;CommF&#39;</span>
+<span class="p">}</span>
+
+<span class="n">survey</span><span class="p">[</span><span class="s2">&quot;frontier_all&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">raw_survey</span><span class="p">[</span><span class="n">c_frontier</span><span class="p">]</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="k">lambda</span> <span class="n">v</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">frontier_mapping</span><span class="p">[</span><span class="n">f</span><span class="o">.</span><span class="n">strip</span><span class="p">()]</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">v</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">)])</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="k">else</span> <span class="p">[])</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">raw_survey</span><span class="p">[</span><span class="n">c_frontier</span><span class="p">]</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0                                                    NaN
-1                                                    NaN
-2      Neutrino Frontier, Rare Processes and Precisio...
-3                Energy Frontier, Computational Frontier
-4      Neutrino Frontier, Theory Frontier, Community ...
-                             ...                        
-723                Energy Frontier, Accelerator Frontier
-724    Energy Frontier, Cosmic Frontier, Theory Front...
-725                                      Cosmic Frontier
-726    Energy Frontier, Instrumentation Frontier, Com...
-727                                 Accelerator Frontier
-Name: I primarily am interested in sessions associated with:, Length: 728, dtype: object
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">frontier_mapping</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+    <span class="n">survey</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;frontier_</span><span class="si">{</span><span class="n">f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">survey</span><span class="p">[</span><span class="s2">&quot;frontier_all&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">v</span><span class="p">:</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">v</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -744,7 +787,7 @@ Name: I primarily am interested in sessions associated with:, Length: 728, dtype
 <p>As a WARNING: Never check this in!</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">survey</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;/workspaces/snowmass-attendance/clean_survey.csv&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">survey</span><span class="o">.</span><span class="n">to_parquet</span><span class="p">(</span><span class="s1">&#39;/workspaces/snowmass-attendance/clean_survey.parquet&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
