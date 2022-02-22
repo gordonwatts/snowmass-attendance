@@ -8,3 +8,4 @@ seaborn
 black
 altair
 ghp-import
+pyarrow

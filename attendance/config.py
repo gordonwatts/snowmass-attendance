@@ -10,7 +10,7 @@ plt.rcParams["figure.figsize"] = (10, 7)
 
 
 # Load and clean the data. For how the cleaning is done, see the cleaning notebook.
-survey = pd.read_csv('/workspaces/snowmass-attendance/clean_survey.csv')
+survey = pd.read_parquet('/workspaces/snowmass-attendance/clean_survey.parquet')
 
 # # Convert the time colunm to a time
 # raw_survey["time"] = pd.to_datetime(raw_survey.Timestamp)
