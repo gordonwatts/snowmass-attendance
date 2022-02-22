@@ -3,7 +3,6 @@
 
 title: Snowmass 2022 Summer Attendance Survey
 author: The Seattle Summer Snowmass Local Organizing Committee
-logo: logo.png
 
 # Force re-execution of notebooks on each build.
 # See https://jupyterbook.org/content/execute.html
