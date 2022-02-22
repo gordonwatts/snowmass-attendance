@@ -6,4 +6,5 @@ root: intro
 chapters:
 - file: demographics
 - file: attend
+- file: covid
 - file: cleaning
