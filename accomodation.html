@@ -356,13 +356,13 @@
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html">
-<div id="altair-viz-ea67f92fb5174fa68284ec655cc51d13"></div>
+<div id="altair-viz-dca380a8df1d487297035cc96c8ab192"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-ea67f92fb5174fa68284ec655cc51d13") {
-      outputDiv = document.getElementById("altair-viz-ea67f92fb5174fa68284ec655cc51d13");
+    if (outputDiv.id !== "altair-viz-dca380a8df1d487297035cc96c8ab192") {
+      outputDiv = document.getElementById("altair-viz-dca380a8df1d487297035cc96c8ab192");
     }
     const paths = {
       "vega": "https://cdn.jsdelivr.net/npm//vega@5?noext",
@@ -434,7 +434,19 @@
 </div>
 <div class="section" id="comments">
 <h2>Comments<a class="headerlink" href="#comments" title="Permalink to this headline">¶</a></h2>
-<p>We also asked for comments. Not a lot of people left comments, so pulling themes out is circumspect.</p>
+<p>We also had a freeform entry for comments. Of the 728 people that filled in the survey:</p>
+<div class="cell tag_hide-input docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Number of freeform entry comments left in survey: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="nb">tuple</span><span class="p">(</span><span class="n">s</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">survey</span><span class="p">[</span><span class="s1">&#39;acc_comments&#39;</span><span class="p">]</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="nb">str</span><span class="p">)))))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Number of freeform entry comments left in survey: 30
+</pre></div>
+</div>
+</div>
+</div>
 <div class="cell tag_hide-input docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_wordcloud</span><span class="p">(</span><span class="n">make_wordcloud</span><span class="p">(</span><span class="n">survey</span><span class="p">[</span><span class="s1">&#39;acc_comments&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;meeting&#39;</span><span class="p">,</span> <span class="s1">&#39;need&#39;</span><span class="p">]))</span>
@@ -442,7 +454,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/accomodation_6_0.png" src="_images/accomodation_6_0.png" />
+<img alt="_images/accomodation_7_0.png" src="_images/accomodation_7_0.png" />
 </div>
 </div>
 <p>People suggested many other types of accommodations:</p>
