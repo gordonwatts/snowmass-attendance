@@ -48,3 +48,37 @@ def dump_words(t_array):
     text = [t for t in t_array if t is not None and isinstance(t, str) and len(t) > 0]
     for t in text:
         print(t)
+
+
+def build_attend(brush = None, selection = None):
+    'Build a histo of people wanting to attend.'
+    c = alt.Chart(data=survey, title="Would you attend?")
+    if brush is not None:
+        c = c.transform_filter(brush)
+
+    color = default_color if selection is None else alt.condition(selection, default_color, alt.value('orange'))
+
+    attend_histo = (
+        c
+        .transform_joinaggregate(total='count(*)')
+        .transform_calculate(pct='1 / datum.total')
+        .mark_bar()
+        .encode(
+            x=alt.X(shorthand="count(attend)"),
+            y=alt.Y(shorthand="attend:N", title="", sort="-x"),
+            color = color
+        )
+    )
+
+    attend_text = (
+        attend_histo.mark_text(align="right", dx=-3)
+                    .encode(
+                        text=alt.Text("sum(pct):Q", format=".0%"),
+                        color=alt.value("white")
+                    )
+    )
+
+    if selection is not None:
+        attend_histo = attend_histo.add_selection(selection)
+
+    return attend_histo + attend_text
