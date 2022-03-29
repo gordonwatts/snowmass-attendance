@@ -1,5 +1,5 @@
 jupyterlab
-jupyterbook
+jupyter-book
 wheel
 wordcloud
 matplotlib
